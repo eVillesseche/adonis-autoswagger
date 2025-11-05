@@ -68,6 +68,8 @@ export default {
   defaultSecurityScheme: "BearerAuth", // optional
   persistAuthorization: true, // persist authorization between reloads on the swagger page
   showFullPath: false, // the path displayed after endpoint summary
+  disableDefaultSchemas: true, // disable default schemas "any" & "PaginationMeta"
+  schemas: {}  // define your own shemas 
 };
 ```
 
@@ -475,6 +477,29 @@ Example:
 
 ```ts
  @responseBody 200 - <Model>.with(relations).append(enumFieldExample)
+```
+### Manual 
+Use the `schemas` option in config to define your schemas that ou don't want as model in you app 
+
+Example:
+`config/swagger.ts`
+
+```ts
+export default {
+  [...]
+  schemas: {
+    Product:{
+    type: "object",
+      properties: {
+        views: { type: "ProductView[]", example:[], nullable:false},
+        status: { type: "string", example:"pending", nullable:false},
+        email: { type: "string", example:"johndoe@example.com", nullable:false},
+        age: { type: "number", example: 30, nullable:false}
+      }
+    }
+    }
+  [...]
+}
 ```
 
 ## Extend Models

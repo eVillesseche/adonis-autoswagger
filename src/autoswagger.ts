@@ -610,7 +610,7 @@ export class AutoSwagger {
   }
 
   private async getSchemas() {
-    let schemas = {
+    let schemas = this.options.disableDefaultSchemas ? {} :{
       Any: {
         description: "Any JSON object not defined as schema",
       },
@@ -618,6 +618,7 @@ export class AutoSwagger {
 
     schemas = {
       ...schemas,
+       ...this.options.schemas,
       ...(await this.getInterfaces()),
       ...(await this.getSerializers()),
       ...(await this.getModels()),
@@ -763,7 +764,7 @@ export class AutoSwagger {
   }
 
   private async getInterfaces() {
-    let interfaces = {
+    let interfaces = this.options.disableDefaultSchemas ? {}: {
       ...ExampleInterfaces.paginationInterface(),
     };
     let p = path.join(this.options.appPath, "Interfaces");

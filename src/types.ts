@@ -21,6 +21,8 @@ export interface options {
   productionEnv?: string;
   authMiddlewares?: string[];
   defaultSecurityScheme?: string;
+  disableDefaultSchemas?: boolean,
+  schemas?: any,
 }
 
 export interface common {
